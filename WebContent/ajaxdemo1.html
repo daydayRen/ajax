@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ajax_demo</title>
+<script>
+	var xmlhttp;
+	var userName = document.getElementById("userName").value;
+	var queryString = "AjaxDemo?userName=" + userName;
+
+	function myFunction() {
+		loadXMLDoc(
+				queryString,
+				function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						document.getElementById("show").innerHTML = xmlhttp.responseText;
+					}
+				});
+	}
+
+	function loadXMLDoc(url, statechange) {
+		if (window.XMLHttpRequest) {// IE7+, Firefox, Chrome, Opera, Safari 代码
+			xmlhttp = new XMLHttpRequest();
+		} else {// IE6, IE5 代码
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = statechange;
+		xmlhttp.open("POST", url, true);
+		xmlhttp.send();
+	}
+</script>
+</head>
+<body>
+	<form action="#">
+
+		<h2>获取姓名:</h2>
+		<input id="userName" type="text" />
+		<br>
+		<div id="show" style="border-bottom-color: red;" ></div>
+		<br>
+		<button type="button" onclick="loadXMLDoc()">请点击</button>
+	</form>
+</body>
+</html>
